@@ -1,0 +1,21 @@
+
+.link{
+  color: rgba(246, 246, 246, 0.699);
+  text-decoration: none;
+  padding-top: 12px;
+}
+.bg{
+  background: rgba(0, 0, 0, 0.786);
+}
+.headerWrapper{
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1% 10%;
+  height: 8vh;
+  transition: .5s;
+  z-index: 2;
+}
