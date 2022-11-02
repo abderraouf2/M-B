@@ -22,7 +22,7 @@ export const storage = getStorage(app);
 
 const db = getFirestore(app);
 export const addItems = async (name, imageUrl, price, description) => {try {
-  const docRef = await addDoc(collection(db, "users"), {
+  const docRef = await addDoc(collection(db, "items"), {
     name,
     price,
     imageUrl,

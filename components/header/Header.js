@@ -21,11 +21,11 @@ export default function Header({colorbg = false}) {
                            colorbg ? 'bg-stone-800' : '')} 
     >
       <Link href="/">
-        <a>
+        
           <div className='w-[100%]'>
             <img src="/static/logo.png" alt="" width='75px' height='75px' />
           </div>
-        </a>
+        
       </Link>
       <div className='pr-[2%] ' >
         <Links />
