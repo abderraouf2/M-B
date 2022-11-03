@@ -1,6 +1,6 @@
 
  import React, { Component } from 'react';
- import { addItems, storage } from '../lib/firebase';
+ import { addItems, storage } from '../pages/api/firebase';
  import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 

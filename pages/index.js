@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import AddItem from '../components/addItems';
 
 import Banner from '../components/banner/Banner';
 import Categories from '../components/categories/Categories';
@@ -18,6 +19,7 @@ export default function Home() {
       
       <Banner />
       <Categories />
+      <AddItem />
     </div>
   )
 }

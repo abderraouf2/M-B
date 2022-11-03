@@ -8,19 +8,13 @@ export default function Links() {
       <Link href='/store' className={styles.link}>
          Store 
       </Link>
-      <Link href='/store' className={styles.link}>
-         Store 
+      <Link href='/login' className={styles.link}>
+         login 
       </Link>
       <Link href='/store' className={styles.link}>
         
-          <AiFillShopping size='4vh' />
+          <AiFillShopping size='25' />
         
-      </Link>
-      <Link href='/store' className={styles.link}>
-         Store 
-      </Link>
-      <Link href='/store' className={styles.link}>
-         Store 
       </Link>
       
     </div>

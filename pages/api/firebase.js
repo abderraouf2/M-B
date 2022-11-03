@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from 'firebase/storage';
-import { collection, addDoc, getFirestore } from "firebase/firestore"; 
+import { collection, addDoc, getFirestore,doc, setDoc,getDoc } from "firebase/firestore"; 
 import { getAuth, signInWithPhoneNumber } from "firebase/auth";
 
 
@@ -22,13 +22,14 @@ export const storage = getStorage(app);
 
 const db = getFirestore(app);
 export const addItems = async (name, imageUrl, price, description) => {try {
-  const docRef = await addDoc(collection(db, "items"), {
+  const itemRef = doc(db, `users/${name}`)
+  await setDoc(itemRef, {
     name,
     price,
     imageUrl,
     desc: description
   });
-  console.log("Document written with ID: ", docRef.id);
+  console.log("Document written with ID: ", itemRef.id);
 } catch (e) {
   console.error("Error adding document: ", e);
 }}
@@ -52,5 +53,17 @@ export const signIn = (phoneNumber, appVerifier) =>{
   } catch (error) {
     
   }
- 
 }  
+
+export const addUser = async (name, phoneNumber, user) => {
+  const userRef = doc(db,`users/${user.uid}`);
+  const snapShot= await getDoc(userRef);
+  if (!snapShot.exists()) {
+    await setDoc(userRef, {
+      name,
+      phoneNumber,
+    });
+    console.log("Document written with ID: ", user.uid);
+  }
+  else console.log("user already in db");
+}

@@ -3,15 +3,16 @@ import Head from 'next/head'
 import cls from 'classnames'
 import styles from './login.module.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth, db } from '../api/firebase'
-import { setDoc, doc } from "firebase/firestore"; 
+import { auth, db, addUser } from '../api/firebase'
+
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 class login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       name : '',
-      number : null, 
+      phoneNumber : null, 
       otp : null,
       show : false
     }
@@ -31,7 +32,7 @@ class login extends Component {
       }, auth);
       console.log("sending otp");
       recaptchaVerifier.render();
-      signInWithPhoneNumber(auth, this.state.number, window.recaptchaVerifier)
+      signInWithPhoneNumber(auth, this.state.phoneNumber, window.recaptchaVerifier)
         .then((confirmationResult) => {
           window.confirmationResult = confirmationResult;
       }).catch((error) => {
@@ -43,16 +44,10 @@ class login extends Component {
       confirmationResult.confirm(this.state.otp).then( async (result) => {
         
         const user = result.user;
-        console.log(user);
-        // const userRef= doc(db,`users/${user.uid}`);
-        // await setDoc(userRef, {
-        //   name: this.state.name,
-        //   number : this.state.number,
-        // });
-        // console.log("Document written with ID: ", user.uid);
+        addUser(this.state.name, this.state.phoneNumber, user)
+        
       }).catch((error) => {
-        // User couldn't sign in (bad verification code?)
-        // ...
+        alert("otp error")
       });
     }
     const inputStyle = " h-[5vh] mb-[4vh] p-[5px] bg-transparent border-b-2 border-l-2 rounded-lg border-slate-600 focus:outline-none focus:border-slate-300  duration-100 text-white"
@@ -71,7 +66,7 @@ class login extends Component {
               <input className={inputStyle}  type="text" name="" placeholder='full name' onChange={(e)=>{this.setState({name : e.target.value})}} />
 
               <div className={ cls( 'flex items-center flex-col' ,this.state.show ? 'hidden' : '') } >
-              <input className={inputStyle}  type="text" name="" placeholder='phone number' onChange={(e)=>{this.setState({number : e.target.value})}} />
+              <input className={inputStyle}  type="text" name="" placeholder='phone number' onChange={(e)=>{this.setState({phoneNumber : e.target.value})}} />
                 <div id='recaptcha-container'></div>
                 <button className=' text-white ' type="submit" onClick={submitNumber}>sendCode</button>
               </div>
