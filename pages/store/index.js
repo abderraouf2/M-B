@@ -4,6 +4,7 @@ import ItemCard from '../../components/itemCard/ItemCard'
 import { items } from './items.js'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+
 export default function store() {
   const router = useRouter()
   return (
@@ -13,12 +14,13 @@ export default function store() {
         {
             items.map((item) => {
              return (
-             <Link href={`/store/${item.id}`} key={item.id} ><a>
-             <ItemCard img={item.img} name={item.name} categorie={item.categorie} />
-             </a></Link>)
+             <Link href={`/store/${item.id}`} key={item.id} >
+                <ItemCard key={item.id} img={item.img} name={item.name} categorie={item.categorie} />
+             </Link>)
             })
         }
         
+
       </div>
     </div>
   )

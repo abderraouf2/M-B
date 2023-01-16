@@ -48,7 +48,8 @@
     }
     return (
       <div>
-        <input type="file" onChange={(e)=>(this.image = e.target.files[0]) } />
+        <input type="file" onChange={(e)=>(this.image = e.target.files[0], console.log(e.target.files[0])) } />
+       
          <input type="text" onChange={(e)=>this.setState({name : e.target.value}) } placeholder='name' required />
           {
             console.log(this.state.name)

@@ -3,8 +3,7 @@ import Head from 'next/head'
 import cls from 'classnames'
 import styles from './login.module.css'
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
-import { auth, db, addUser } from '../api/firebase'
-
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 
 import { doc, setDoc, getDoc } from "firebase/firestore";
 

@@ -55,15 +55,25 @@ export const signIn = (phoneNumber, appVerifier) =>{
   }
 }  
 
-export const addUser = async (name, phoneNumber, user) => {
-  const userRef = doc(db,`users/${user.uid}`);
+export const isNewUser = async (userUID) => {
+  const userRef = doc(db,`users/${userUID}`);
   const snapShot= await getDoc(userRef);
   if (!snapShot.exists()) {
+    return true;
+  } 
+  return false;
+}
+
+export const addUser = async (name, phoneNumber, userUID) => {
+    const userRef = doc(db,`users/${userUID}`);
     await setDoc(userRef, {
       name,
       phoneNumber,
     });
-    console.log("Document written with ID: ", user.uid);
-  }
-  else console.log("user already in db");
+    console.log("Document written with ID: ", userUID);
+
+}
+
+export const handleCart = () => {
+  
 }
